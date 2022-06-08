@@ -1,18 +1,18 @@
 NAME = phonebook
 
 CC = clang++
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRC = main.cpp
-OBJ = $(SRC:%.cpp=%.o)
+SRCS = main.cpp Phonbook.cpp
+OBJS = $(SRCS:%.cpp=%.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	$(CC) $(FLAGS) -o $(NAME) $(OBJ)
+$(NAME): $(OBJS)
+	$(CC) $(FLAGS) -o $(NAME) $(OBJS)
 
 clean:
-	rm -f $(OBJ)
+	rm -f $(OBJS)
 
 fclean: clean
 	rm -f $(NAME)
