@@ -36,11 +36,14 @@ void select_index(PhoneBook* pb, int total_num)
 {
 	int index;
 	std::string input;
+	std::stringstream ss;
 
 	std::cout << "Select index : ";
 	std::getline(std::cin, input);
-	index = std::stoi(input);
-	if (index < 0 || index >= total_num)
+	ss << input;
+	ss >> index;
+
+	if (index < 0 || index >= total_num || ss.fail() == true)
 	{
 		std::cout << "Wrong index!" << std::endl;
 	}
@@ -53,6 +56,7 @@ void select_index(PhoneBook* pb, int total_num)
 int	main()
 {
 	int total_num = 0;
+	int idx = 0;
 	std::string input;
 	PhoneBook pb[8];
 
@@ -61,8 +65,10 @@ int	main()
 		std::getline(std::cin, input);
 		if (input == "ADD")
 		{
-			pb[total_num].add_contact();
-			total_num++;
+			pb[idx++].add_contact();
+			idx %= 8;
+			if (total_num < 8)
+				total_num++;
 		}
 		else if (input == "SEARCH")
 		{
