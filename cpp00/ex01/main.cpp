@@ -14,7 +14,7 @@
 #include <iostream>
 #include "PhoneBook.hpp"
 
-void show_preview(PhoneBook* pb, int total_num)
+void show_preview(Contact* pb, int total_num)
 {
     std::cout << std::right << std::setw(10) << "Index";
     std::cout << "|";
@@ -32,7 +32,7 @@ void show_preview(PhoneBook* pb, int total_num)
 	std::cout << std::endl;
 }
 
-void select_index(PhoneBook* pb, int total_num)
+void select_index(Contact* pb, int total_num)
 {
 	int index;
 	std::string input;
@@ -58,22 +58,22 @@ int	main()
 	int total_num = 0;
 	int idx = 0;
 	std::string input;
-	PhoneBook pb[8];
+	PhoneBook pb;
 
 	while (1)
 	{
 		std::getline(std::cin, input);
 		if (input == "ADD")
 		{
-			pb[idx++].add_contact();
+			pb.contact[idx++].add_contact();
 			idx %= 8;
 			if (total_num < 8)
 				total_num++;
 		}
 		else if (input == "SEARCH")
 		{
-			show_preview(pb, total_num);
-			select_index(pb, total_num);
+			show_preview(pb.contact, total_num);
+			select_index(pb.contact, total_num);
 		}
 		else if (input == "EXIT")
 			break;

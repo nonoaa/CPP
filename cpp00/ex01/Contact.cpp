@@ -1,6 +1,6 @@
-#include "PhoneBook.hpp"
+#include "Contact.hpp"
 
-void PhoneBook::add_contact(void)
+void Contact::add_contact(void)
 {
     int i;
     std::string input;
@@ -27,7 +27,7 @@ void PhoneBook::add_contact(void)
     this->darkest_secret = input;
 }
 
-void PhoneBook::print_all(void)
+void Contact::print_all(void)
 {
     std::cout << "First name : " << this->first_name << std::endl;
     std::cout << "Last name : " << this->last_name << std::endl;
@@ -36,7 +36,7 @@ void PhoneBook::print_all(void)
     std::cout << "Darkest secret : " << this->darkest_secret << std::endl;
 }
 
-void PhoneBook::print_preview(int index)
+void Contact::print_preview(int index)
 {
     print_column(std::to_string(index));
     std::cout << "|";
@@ -48,7 +48,7 @@ void PhoneBook::print_preview(int index)
     std::cout << std::endl;
 }
 
-void PhoneBook::print_column(std::string str)
+void Contact::print_column(std::string str)
 {
     if (str.length() > 10)
     {
