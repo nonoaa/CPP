@@ -8,43 +8,43 @@ void PhoneBook::add_contact(void)
     std::cout << std::endl;
     std::cout << "1. First name : ";
     std::getline(std::cin, input);
-    first_name_ = input;
+    this->first_name = input;
 
     std::cout << "2. Last name: ";
     std::getline(std::cin, input);
-    last_name_ = input;
+    this->last_name = input;
 
     std::cout << "3. Nickname : ";
     std::getline(std::cin, input);
-    nickname_ = input;
+    this->nickname = input;
 
     std::cout << "4. Phone number : ";
     std::getline(std::cin, input);
-    phone_number_ = input;
+    this->phone_number = input;
 
     std::cout << "5. Darkest secret : ";
     std::getline(std::cin, input);
-    darkest_secret_ = input;
+    this->darkest_secret = input;
 }
 
 void PhoneBook::print_all(void)
 {
-    std::cout << "First name : " << first_name_ << std::endl;
-    std::cout << "Last name : " << last_name_ << std::endl;
-    std::cout << "Nickname : " << nickname_ << std::endl;
-    std::cout << "Phone number : " << phone_number_ << std::endl;
-    std::cout << "Darkest secret : " << darkest_secret_ << std::endl;
+    std::cout << "First name : " << this->first_name << std::endl;
+    std::cout << "Last name : " << this->last_name << std::endl;
+    std::cout << "Nickname : " << this->nickname << std::endl;
+    std::cout << "Phone number : " << this->phone_number << std::endl;
+    std::cout << "Darkest secret : " << this->darkest_secret << std::endl;
 }
 
 void PhoneBook::print_preview(int index)
 {
     print_column(std::to_string(index));
     std::cout << "|";
-    print_column(first_name_);
+    print_column(this->first_name);
     std::cout << "|";
-    print_column(last_name_);
+    print_column(this->last_name);
     std::cout << "|";
-    print_column(nickname_);
+    print_column(this->nickname);
     std::cout << std::endl;
 }
 
