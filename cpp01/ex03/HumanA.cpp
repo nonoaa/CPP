@@ -2,5 +2,5 @@
 
 void HumanA::attack(void)
 {
-    std::cout << name_ << " attacks with his " << weapon_.getType() << std::endl;
+    std::cout << this->name << " attacks with their " << this->weapon.getType() << std::endl;
 }

@@ -2,10 +2,10 @@
 
 const std::string& Weapon::getType(void)
 {
-    return type_;
+    return this->type;
 }
 
 void Weapon::setType(std::string type)
 {
-    type_ = type;
+    this->type = type;
 }

@@ -1,4 +1,4 @@
-NAME = main
+NAME = strings
 
 CC = clang++
 FLAGS = -Wall -Wextra -Werror -std=c++98
