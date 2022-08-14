@@ -3,7 +3,7 @@ NAME = zombie
 CC = clang++
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRCS = main.cpp Zombie.cpp newZombie.cpp ZombieHorde.cpp
+SRCS = main.cpp Zombie.cpp ZombieHorde.cpp
 OBJS = $(SRCS:%.cpp=%.o)
 
 all: $(NAME)

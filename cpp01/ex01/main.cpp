@@ -6,7 +6,7 @@ int main(void)
 	int N = 3;
 	
 	horde = zombieHorde(N, "Garrosh");
-	for(int i=0; i<N; i++)
+	for(int i = 0; i < N; i++)
 	{
 		horde->announce();
 	}

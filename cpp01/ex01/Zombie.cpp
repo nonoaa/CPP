@@ -2,20 +2,20 @@
 
 Zombie::Zombie(void)
 {
-    name_ = "zombie";
-}
-
-Zombie::~Zombie()
-{
-    std::cout << "<" << name_ << "> " << "died..." << std::endl;
+    this->name = "zombie";
 }
 
 void Zombie::setName(std::string name)
 {
-    name_ = name;
+    this->name = name;
+}
+
+Zombie::~Zombie()
+{
+    std::cout << this->name << ": died..." << std::endl;
 }
 
 void Zombie::announce(void)
 {
-    std::cout << "<" << name_ << "> " << "BraiiiiiiinnnzzzZ..." << std::endl;
+    std::cout << this->name << ": BraiiiiiiinnnzzzZ..." << std::endl;
 }
