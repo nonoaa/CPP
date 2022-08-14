@@ -8,22 +8,52 @@ void Contact::add_contact(void)
     std::cout << std::endl;
     std::cout << "1. First name : ";
     std::getline(std::cin, input);
+	while (input == "")
+	{
+		std::cout << "Error: input must not be empty." << std::endl;
+		std::cout << "1. First name : ";
+		std::getline(std::cin, input);
+	}
     this->first_name = input;
 
     std::cout << "2. Last name: ";
     std::getline(std::cin, input);
+	while (input == "")
+	{
+		std::cout << "Error: input must not be empty." << std::endl;
+		std::cout << "2. Last name: ";
+		std::getline(std::cin, input);
+	}
     this->last_name = input;
 
     std::cout << "3. Nickname : ";
     std::getline(std::cin, input);
+	while (input == "")
+	{
+		std::cout << "Error: input must not be empty." << std::endl;
+		std::cout << "3. Nickname : ";
+		std::getline(std::cin, input);
+	}
     this->nickname = input;
 
     std::cout << "4. Phone number : ";
     std::getline(std::cin, input);
+	while (input == "")
+	{
+		std::cout << "Error: input must not be empty." << std::endl;
+		std::cout << "4. Phone number : ";
+		std::getline(std::cin, input);
+	}
     this->phone_number = input;
 
     std::cout << "5. Darkest secret : ";
     std::getline(std::cin, input);
+	while (input == "")
+	{
+		std::cout << "Error: input must not be empty." << std::endl;
+		std::cout << "5. Darkest secret : ";
+		std::getline(std::cin, input);
+	}
     this->darkest_secret = input;
 }
 
