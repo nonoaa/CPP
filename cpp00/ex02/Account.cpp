@@ -62,7 +62,6 @@ void Account::makeDeposit(int deposit)
 		<< ";deposit:" << deposit
 		<< ";amount:" << _amount
 		<< ";nb_deposits:" << _nbDeposits << std::endl;
-	
 }
 
 bool Account::makeWithdrawal(int withdrawal)
