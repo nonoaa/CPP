@@ -8,7 +8,7 @@ int main(void)
 	horde = zombieHorde(N, "Garrosh");
 	for(int i = 0; i < N; i++)
 	{
-		horde->announce();
+		horde[i].announce();
 	}
 	delete[] horde;
 
