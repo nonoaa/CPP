@@ -8,8 +8,8 @@ Point::Point(const Point &src): x(src.x), y(src.y) {}
 
 Point &Point::operator=(const Point &src)
 {
-	const_cast<Fixed &>(this->x) = src.getX();
-	const_cast<Fixed &>(this->y) = src.getY();
+	const_cast<Fixed &>(this->x) = src.x;
+	const_cast<Fixed &>(this->y) = src.y;
 
 	return (*this);
 }
