@@ -5,6 +5,6 @@ int main(void)
 	ClapTrap Yasuo("Yasuo");
 
 	Yasuo.attack("Teemo");
-	Yasuo.takeDamage(100);
+	Yasuo.takeDamage(5);
 	Yasuo.beRepaired(3);
 }
