@@ -2,7 +2,6 @@
 
 ScavTrap::ScavTrap() : ClapTrap()
 {
-    name_ = "noname";
     hitPoints_ = 100;
     energyPoints_ = 50;
     attackDamage_ = 20;
@@ -11,7 +10,6 @@ ScavTrap::ScavTrap() : ClapTrap()
 
 ScavTrap::ScavTrap(const std::string &name) : ClapTrap(name)
 {
-    name_ = name;
     hitPoints_ = 100;
     energyPoints_ = 50;
     attackDamage_ = 20;
@@ -21,7 +19,6 @@ ScavTrap::ScavTrap(const std::string &name) : ClapTrap(name)
 ScavTrap::ScavTrap(const ScavTrap &src) : ClapTrap(src)
 {
     std::cout << "ScavTrap Copy operator called" << std::endl;
-    *this = src;
 }
 
 ScavTrap &ScavTrap::operator=(const ScavTrap &src)

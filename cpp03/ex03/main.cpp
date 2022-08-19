@@ -24,7 +24,7 @@ int main()
         std::cout << std::endl;
         harry.attack("james");
         harry.beRepaired(100);
-        harry.takeDamage(200);
+        harry.takeDamage(150);
 
         harry.highFiveGuys();
         harry.guardGate();

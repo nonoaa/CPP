@@ -17,7 +17,7 @@ public:
     DiamondTrap &operator=(const DiamondTrap &src);
     virtual ~DiamondTrap();
 
-    void attack(const std::string& target);
+    using ScavTrap::attack;
     void whoAmI(void);
 };
 
