@@ -1,27 +1,18 @@
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap()
+ClapTrap::ClapTrap(): name_("noname"), hitPoints_(10), energyPoints_(10), attackDamage_(0)
 {
-    name_ = "noname";
-    hitPoints_ = 10;
-    energyPoints_ = 10;
-    attackDamage_ = 0;
-    std::cout << "ClapTrap " << name_ << " default constructor called."<< std::endl;
+    std::cout << "Default constructor called" << std::endl;
 }
 
-ClapTrap::ClapTrap(const std::string &name)
+ClapTrap::ClapTrap(const std::string &name): name_(name), hitPoints_(10), energyPoints_(10), attackDamage_(0)
 {
     std::cout << "Constructor called" << std::endl;
-    name_ = name;
-    hitPoints_ = 10;
-    energyPoints_ = 10;
-    attackDamage_ = 0;
 }
 
-ClapTrap::ClapTrap(const ClapTrap &src)
+ClapTrap::ClapTrap(const ClapTrap &src): name_(src.name_), hitPoints_(src.hitPoints_), energyPoints_(src.energyPoints_), attackDamage_(src.attackDamage_)
 {
     std::cout << "Copy constructor called" << std::endl;
-    *this = src;
 }
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &src)
@@ -51,28 +42,29 @@ void ClapTrap::attack(const std::string& target)
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
-    std::cout << name_ << " take " << amount << " damage!" << std::endl;
+    std::cout << name_ << " take " << amount << " damage!";
 	if (hitPoints_ < amount)
 		hitPoints_ = 0;
     else
 	    hitPoints_ -= amount;
-
+    std::cout << " Current Hit Points: " << hitPoints_ << std::endl;
 }
 void ClapTrap::beRepaired(unsigned int amount)
 {
     if (energyPoints_ == 0)
     {
-    	std::cout << name_ << "has no EnergyPoints." << std::endl;
+    	std::cout << "ClapTrap " << name_ << "has no EnergyPoints." << std::endl;
     }
     else
     {
-        std::cout << name_ << " be repaired " << amount << " hit points!" << std::endl;
+        std::cout << name_ << " is repaired " << amount << " hit points!";
         hitPoints_ += amount;
+        std::cout << " Current Hit Points: " << hitPoints_ << std::endl;
         energyPoints_--;
     }
 }
 
 ClapTrap::~ClapTrap()
 {
-    std::cout << "ClapTrap Destructor called" << std::endl;
+    std::cout << "Destructor called" << std::endl;
 }

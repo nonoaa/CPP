@@ -2,7 +2,6 @@
 
 FragTrap::FragTrap() : ClapTrap()
 {
-    name_ = "noname";
     hitPoints_ = 100;
     energyPoints_ = 100;
     attackDamage_ = 30;
@@ -11,7 +10,6 @@ FragTrap::FragTrap() : ClapTrap()
 
 FragTrap::FragTrap(const std::string &name) : ClapTrap(name)
 {
-    name_ = name;
     hitPoints_ = 100;
     energyPoints_ = 100;
     attackDamage_ = 30;
@@ -21,7 +19,6 @@ FragTrap::FragTrap(const std::string &name) : ClapTrap(name)
 FragTrap::FragTrap(const FragTrap &src) : ClapTrap(src)
 {
     std::cout << "FragTrap Copy operator called" << std::endl;
-    *this = src;
 }
 
 FragTrap &FragTrap::operator=(const FragTrap &src)
@@ -56,5 +53,5 @@ void FragTrap::attack(const std::string& target)
 
 void FragTrap::highFiveGuys(void)
 {
-    std::cout << "FragTrap " << name_ << " is in Gate keeper mode."<< std::endl;
+    std::cout << "FragTrap " << name_ << " is doing highfive."<< std::endl;
 }
