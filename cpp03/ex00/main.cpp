@@ -2,9 +2,9 @@
 
 int main(void)
 {
-	ClapTrap Yasuo("Yasuo");
+	ClapTrap yasuo("Yasuo");
 
-	Yasuo.attack("Teemo");
-	Yasuo.takeDamage(5);
-	Yasuo.beRepaired(3);
+	yasuo.attack("Teemo");
+	yasuo.takeDamage(5);
+	yasuo.beRepaired(3);
 }
