@@ -6,6 +6,6 @@ int main(void)
     ScavTrap Yone(Yasuo);
 
 	Yasuo.attack("Teemo");
-	Yasuo.takeDamage(100);
+	Yasuo.takeDamage(6);
 	Yasuo.beRepaired(3);
 }
