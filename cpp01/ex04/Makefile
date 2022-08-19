@@ -6,6 +6,9 @@ FLAGS = -Wall -Wextra -Werror -std=c++98
 SRCS = main.cpp
 OBJS = $(SRCS:%.cpp=%.o)
 
+%.o: %.cpp
+	$(CC) $(FLAGS) -c $< -o $(<:.cpp=.o)
+
 all: $(NAME)
 
 $(NAME): $(OBJS)
