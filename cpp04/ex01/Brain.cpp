@@ -34,6 +34,16 @@ Brain &Brain::operator=(const Brain &src)
 	return (*this);
 }
 
+void Brain::getIdea(int i)
+{
+	std::cout << ideas[i] << std::endl;
+}
+
+void Brain::setIdea(int i, std::string str)
+{
+	ideas[i] = str;
+}
+
 Brain::~Brain()
 {
 	std::cout << "Brain destructor called" << std::endl;
