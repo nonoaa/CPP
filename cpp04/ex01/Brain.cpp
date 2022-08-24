@@ -30,7 +30,7 @@ Brain &Brain::operator=(const Brain &src)
 	{
 		ideas[i] = src.ideas[i];
 	}
-	std::cout << "Brain Copy assignment constructor called" << std::endl;
+	std::cout << "Brain Copy assignment operator called" << std::endl;
 	return (*this);
 }
 
