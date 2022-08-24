@@ -33,8 +33,8 @@ int main()
     ((Dog *)animals[0])->getBrain()->getIdea(0);
     ((Cat *)animals[1])->getBrain()->getIdea(0);
 
-    std::cout << &copy1 << std::endl;
-    std::cout << animals[0] << std::endl;
+    std::cout << copy1.getBrain() << std::endl;
+    std::cout << ((Dog *)animals[0])->getBrain() << std::endl;
 
     for (int i = 0; i < 10; i++)
     {
