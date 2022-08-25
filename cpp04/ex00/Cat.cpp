@@ -8,7 +8,7 @@ Cat::Cat()
 
 Cat::Cat(const Cat &src): Animal(src)
 {
-	std::cout << "Cat copy operator called" << std::endl;
+	std::cout << "Cat Copy constructor called" << std::endl;
 }
 
 Cat &Cat::operator=(const Cat &src)

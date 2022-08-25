@@ -6,7 +6,8 @@ int main()
     std::cout << "**  NONAME  **" <<std::endl;
     std::cout << std::endl;
     {
-        DiamondTrap yesi;
+        DiamondTrap yasuo("yasuo");
+        DiamondTrap yesi(yasuo);
         std::cout << std::endl;
         yesi.attack("peter");
         yesi.beRepaired(100);

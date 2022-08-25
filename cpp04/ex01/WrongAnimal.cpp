@@ -8,7 +8,7 @@ WrongAnimal::WrongAnimal()
 
 WrongAnimal::WrongAnimal(const WrongAnimal& src): type(src.type)
 {
-	std::cout << "Copy operator called" << std::endl;
+	std::cout << "Copy constructor called" << std::endl;
 }
 
 WrongAnimal &WrongAnimal::operator=(const WrongAnimal &src)

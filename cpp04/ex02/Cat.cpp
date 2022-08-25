@@ -11,7 +11,7 @@ Cat::Cat(const Cat &src): Animal(src)
 {
 	brain_ = src.brain_;
 	brain_ = new Brain(*(src.brain_));
-	std::cout << "Cat copy operator called" << std::endl;
+	std::cout << "Cat Copy constructor called" << std::endl;
 }
 
 Cat &Cat::operator=(const Cat &src)

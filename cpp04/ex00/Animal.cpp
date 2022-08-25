@@ -8,7 +8,7 @@ Animal::Animal()
 
 Animal::Animal(const Animal& src): type(src.type)
 {
-	std::cout << "Copy operator called" << std::endl;
+	std::cout << "Copy constructor called" << std::endl;
 }
 
 Animal &Animal::operator=(const Animal &src)

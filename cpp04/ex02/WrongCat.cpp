@@ -8,7 +8,7 @@ WrongCat::WrongCat()
 
 WrongCat::WrongCat(const WrongCat &src): WrongAnimal(src)
 {
-	std::cout << "WrongCat copy operator called" << std::endl;
+	std::cout << "WrongCat Copy constructor called" << std::endl;
 }
 
 WrongCat &WrongCat::operator=(const WrongCat &src)
