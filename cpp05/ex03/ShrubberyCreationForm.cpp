@@ -2,7 +2,7 @@
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string const &target) : Form(target, 145, 137) {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &src) : Form(src){}
+ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &src) : Form(src) {}
 
 ShrubberyCreationForm &ShrubberyCreationForm::operator=(ShrubberyCreationForm const &src)
 {
