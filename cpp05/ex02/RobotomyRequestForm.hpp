@@ -8,7 +8,8 @@
 class RobotomyRequestForm : public Form
 {
 private:
-	RobotomyRequestForm():Form("", 0, 0){};
+	std::string target_;
+	RobotomyRequestForm();
 public:
 	RobotomyRequestForm(std::string const &target);
 	RobotomyRequestForm(RobotomyRequestForm const &src);

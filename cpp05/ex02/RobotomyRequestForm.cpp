@@ -1,8 +1,8 @@
 #include "RobotomyRequestForm.hpp"
 
-RobotomyRequestForm::RobotomyRequestForm(std::string const &target) : Form(target, 72, 45) {}
+RobotomyRequestForm::RobotomyRequestForm(std::string const &target) : Form("", 72, 45), target_(target) {}
 
-RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const &src) : Form(src) {}
+RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const &src) : Form(src), target_(src.target_) {}
 
 RobotomyRequestForm &RobotomyRequestForm::operator=(RobotomyRequestForm const &src)
 {
@@ -22,11 +22,11 @@ void RobotomyRequestForm::action(Bureaucrat const &executor) const
 	std::cout << "drrrrrrrrrrr.........." << std::endl;
 	if (dis(gen))
 	{
-		std::cout << getName() << " has been successfully robotomized." << std::endl;
+		std::cout << target_ << " has been successfully robotomized." << std::endl;
 	}
 	else
 	{
-		std::cout << getName() << " has been failed robotomizing." << std::endl;
+		std::cout << target_ << " has been failed robotomizing." << std::endl;
 	}
 	
 }

@@ -1,7 +1,5 @@
 #include "Form.hpp"
 
-Form::Form() : name_(""), signGrade_(0), executeGrade_(0) {}
-
 Form::Form(const std::string name, const int signGrade, const int executeGrade) : name_(name), signGrade_(signGrade), executeGrade_(executeGrade)
 {
 	if (signGrade < 1 || executeGrade < 1)

@@ -1,8 +1,8 @@
 #include "ShrubberyCreationForm.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string const &target) : Form(target, 145, 137) {}
+ShrubberyCreationForm::ShrubberyCreationForm(std::string const &target) : Form("", 145, 137), target_(target) {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &src) : Form(src) {}
+ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &src) : Form(src), target_(src.target_) {}
 
 ShrubberyCreationForm &ShrubberyCreationForm::operator=(ShrubberyCreationForm const &src)
 {
@@ -16,7 +16,7 @@ void ShrubberyCreationForm::action(Bureaucrat const &executor) const
 {
 	if (executor.getGrade() > getExecuteGrade())
 		throw GradeTooLowException();
-	std::ofstream fout(getName() + "_shrubbery");
+	std::ofstream fout(target_ + "_shrubbery");
 	fout << "\
                                                           .\n\
                                               .         ;  \n\

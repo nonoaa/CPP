@@ -8,7 +8,8 @@
 class ShrubberyCreationForm : public Form
 {
 private:
-	ShrubberyCreationForm():Form("", 0, 0){};
+	std::string target_;
+	ShrubberyCreationForm();
 public:
 	ShrubberyCreationForm(std::string const &target);
 	ShrubberyCreationForm(ShrubberyCreationForm const &src);
