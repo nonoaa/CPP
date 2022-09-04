@@ -49,21 +49,27 @@ int main()
 	// 	std::cerr << e.what() << std::endl;
 	// }
 	Intern a;
-
 	Form *b;
-	b= a.makeForm("shrubbery creation", "asd");
-	b->execute(byahn);
-	delete(b);
+	try
+	{
+		b= a.makeForm("shrubbery creation", "asd");
+		b->execute(byahn);
+		delete(b);
 
-	b = a.makeForm("robotomy request", "dddd");
-	b->execute(byahn);
-	delete(b);
+		b = a.makeForm("robotomy request", "dddd");
+		b->execute(byahn);
+		delete(b);
 
-	b = a.makeForm("presidential pardon", "sdsdsd");
-	b->execute(byahn);
-	delete(b);
+		b = a.makeForm("presidential pardon", "sdsdsd");
+		b->execute(byahn);
+		delete(b);
 
-	b = a.makeForm("pr", "dddd");
+		b = a.makeForm("pr", "dddd");
+	}
+	catch (const std::exception &e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
 
 	return 0;
 }
