@@ -10,6 +10,11 @@ char Conversion::toChar() const
 {
 	int n;
 
+	if (value_.length() == 1 && (value_[0] < '0' || value_[0] > '9'))
+	{
+		return value_[0];
+	}
+
 	try
 	{
 		n = std::stoi(value_);
@@ -29,6 +34,10 @@ int Conversion::toInt() const
 {
 	int n;
 
+	if (value_.length() == 1 && (value_[0] < '0' || value_[0] > '9'))
+	{
+		return value_[0];
+	}
 	try
 	{
 		n = std::stoi(value_);
@@ -44,6 +53,10 @@ float Conversion::toFloat() const
 {
 	float n;
 
+	if (value_.length() == 1 && (value_[0] < '0' || value_[0] > '9'))
+	{
+		return value_[0];
+	}
 	try
 	{
 		n = std::stof(value_);
@@ -59,6 +72,10 @@ double Conversion::toDouble() const
 {
 	double n;
 
+	if (value_.length() == 1 && (value_[0] < '0' || value_[0] > '9'))
+	{
+		return value_[0];
+	}
 	try
 	{
 		n = std::stod(value_);
