@@ -60,9 +60,8 @@ int	main()
 	std::string input;
 	PhoneBook pb;
 
-	while (1)
+	while (std::getline(std::cin, input))
 	{
-		std::getline(std::cin, input);
 		if (input == "ADD")
 		{
 			pb.contact[idx++].add_contact();
@@ -78,7 +77,7 @@ int	main()
 		else if (input == "EXIT")
 			break;
 		else
-			std::cout << "Wrong Input.\n";
+			std::cout << "Wrong Input." << std::endl;
 	}
 
 	return (0);
