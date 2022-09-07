@@ -19,16 +19,17 @@ int	main(int argc, char *argv[])
 		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
 	else
 	{
+		std::string input = "";
 		for (int i = 1; i < argc; i++)
 		{
 			int j = 0;
 			while (argv[i][j])
 			{
-				std::cout << (char)std::toupper(argv[i][j]);
+				input += std::toupper(argv[i][j]);
 				j++;
 			}
 		}
-		std::cout << std::endl;
+		std::cout << input << std::endl;
 	}
 	return (0);
 }
