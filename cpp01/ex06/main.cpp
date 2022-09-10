@@ -1,6 +1,6 @@
 #include "Harl.hpp"
 
-int getKaenFilter(std::string msg)
+int getHarlFilter(std::string msg)
 {
 	std::string levels[4] = {
 		"DEBUG",
@@ -26,7 +26,7 @@ int main(int ac, char *av[])
     }
     Harl harl;
 
-	switch (getKaenFilter(av[1]))
+	switch (getHarlFilter(av[1]))
 	{
 	case 0:
 		std::cout << "[ DEBUG ]" << std::endl;
