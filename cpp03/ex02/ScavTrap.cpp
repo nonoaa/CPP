@@ -1,6 +1,6 @@
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap() : ClapTrap()
+ScavTrap::ScavTrap()
 {
     hitPoints_ = 100;
     energyPoints_ = 50;
@@ -40,7 +40,7 @@ void ScavTrap::attack(const std::string& target)
 {
     if (energyPoints_ == 0)
     {
-    	std::cout << "ScavTrap " << name_ << "has no EnergyPoints." << std::endl;
+    	std::cout << "ScavTrap " << name_ << " has no EnergyPoints." << std::endl;
     }
     else
     {
@@ -53,5 +53,5 @@ void ScavTrap::attack(const std::string& target)
 
 void ScavTrap::guardGate(void)
 {
-    std::cout << "ScavTrap " << name_ << " is in Gate keeper mode."<< std::endl;
+    std::cout << "ScavTrap " << name_ << " is guarding gate."<< std::endl;
 }

@@ -7,15 +7,15 @@ int main()
     std::cout << std::endl;
     {
         DiamondTrap yasuo("yasuo");
-        DiamondTrap yesi(yasuo);
+        DiamondTrap by(yasuo);
         std::cout << std::endl;
-        yesi.attack("peter");
-        yesi.beRepaired(100);
-        yesi.takeDamage(200);
+        by.attack("peter");
+        by.beRepaired(100);
+        by.takeDamage(200);
 
-        yesi.highFiveGuys();
-        yesi.guardGate();
-        yesi.whoAmI();
+        by.highFiveGuys();
+        by.guardGate();
+        by.whoAmI();
     }
     std::cout << std::endl;
     std::cout << "**    STRING  **" <<std::endl;

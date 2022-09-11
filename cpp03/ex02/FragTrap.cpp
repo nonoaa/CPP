@@ -1,6 +1,6 @@
 #include "FragTrap.hpp"
 
-FragTrap::FragTrap() : ClapTrap()
+FragTrap::FragTrap()
 {
     hitPoints_ = 100;
     energyPoints_ = 100;
@@ -40,7 +40,7 @@ void FragTrap::attack(const std::string& target)
 {
     if (energyPoints_ == 0)
     {
-    	std::cout << "FragTrap " << name_ << "has no EnergyPoints." << std::endl;
+    	std::cout << "FragTrap " << name_ << " has no EnergyPoints." << std::endl;
     }
     else
     {

@@ -29,7 +29,7 @@ void ClapTrap::attack(const std::string& target)
 {
     if (energyPoints_ == 0)
     {
-    	std::cout << "ClapTrap " << name_ << "has no EnergyPoints." << std::endl;
+    	std::cout << "ClapTrap " << name_ << " has no EnergyPoints." << std::endl;
     }
     else
     {
@@ -53,7 +53,7 @@ void ClapTrap::beRepaired(unsigned int amount)
 {
     if (energyPoints_ == 0)
     {
-    	std::cout << "ClapTrap " << name_ << "has no EnergyPoints." << std::endl;
+    	std::cout << "ClapTrap " << name_ << " has no EnergyPoints." << std::endl;
     }
     else
     {
