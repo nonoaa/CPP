@@ -15,37 +15,39 @@ char Conversion::toChar() const
 		return value_[0];
 	}
 
-	try
+	const char *str = value_.c_str();
+	char *stopstr = NULL;
+
+	n = static_cast<int>(strtod(str, &stopstr));
+	if (n != 0 && !isinf(n) && !isnan(n) && n >= 0 && n <= 255)
 	{
-		n = std::stoi(value_);
-		if (n < 0 || n > 255)
-			throw ImpossibleException();
+		if (!isprint(n))
+			throw NonDisplayableException();
+		return static_cast<char>(n);
 	}
-	catch (...)
-	{
+	else
 		throw ImpossibleException();
-	}
-	if (!isprint(n))
-		throw NonDisplayableException();
-	return static_cast<char>(n);
 }
 
 int Conversion::toInt() const
 {
-	int n;
+	double n;
 
 	if (value_.length() == 1 && (value_[0] < '0' || value_[0] > '9'))
 	{
 		return value_[0];
 	}
-	try
-	{
-		n = std::stoi(value_);
-	}
-	catch (...)
-	{
+	if (value_.length() == 1 && value_[0] == '0')
+		return 0;
+	const char *str = value_.c_str();
+	char *stopstr = NULL;
+
+	n = strtod(str, &stopstr);
+	if (n != 0 && !isinf(n) && !isnan(n))
+		return static_cast<int>(n);
+	else
 		throw ImpossibleException();
-	}
+
 	return n;
 }
 
@@ -57,14 +59,17 @@ float Conversion::toFloat() const
 	{
 		return value_[0];
 	}
-	try
-	{
-		n = std::stof(value_);
-	}
-	catch (...)
-	{
+	if (value_.length() == 1 && value_[0] == '0')
+		return 0;
+	const char *str = value_.c_str();
+	char *stopstr = NULL;
+
+	n = strtof(str, &stopstr);
+	if (n != 0)
+		return n;
+	else
 		throw ImpossibleException();
-	}
+
 	return n;
 }
 
@@ -76,14 +81,17 @@ double Conversion::toDouble() const
 	{
 		return value_[0];
 	}
-	try
-	{
-		n = std::stod(value_);
-	}
-	catch (...)
-	{
+	if (value_.length() == 1 && value_[0] == '0')
+		return 0;
+	const char *str = value_.c_str();
+	char *stopstr = NULL;
+
+	n = strtod(str, &stopstr);
+	if (n != 0)
+		return n;
+	else
 		throw ImpossibleException();
-	}
+
 	return n;
 }
 
