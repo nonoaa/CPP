@@ -1,5 +1,5 @@
 #include "AMateria.hpp"
-
+#include <iostream>
 AMateria::AMateria(std::string const &type)
 {
 	type_ = type;
@@ -17,4 +17,3 @@ std::string const &AMateria::getType() const
 {
 	return type_;
 }
-

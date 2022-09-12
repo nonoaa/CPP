@@ -9,6 +9,7 @@ class Character : public ICharacter
 private:
 	std::string name_;
 	AMateria *materias_[4];
+	bool is_equipped[4];
 	Character();
 
 public:
