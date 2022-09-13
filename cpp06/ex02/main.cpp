@@ -30,21 +30,38 @@ Base *generate(void)
 void identify(Base *p)
 {
 	if (dynamic_cast<A *>(p))
-		std::cout << "A" << std::endl;
+		std::cout << "ptr: A" << std::endl;
 	else if (dynamic_cast<B *>(p))
-		std::cout << "B" << std::endl;
+		std::cout << "ptr: B" << std::endl;
 	else if (dynamic_cast<C *>(p))
-		std::cout << "C" << std::endl;
+		std::cout << "ptr: C" << std::endl;
 }
 
 void identify(Base &p)
 {
-	if (dynamic_cast<A *>(&p))
-		std::cout << "A" << std::endl;
-	else if (dynamic_cast<B *>(&p))
-		std::cout << "B" << std::endl;
-	else if (dynamic_cast<C *>(&p))
-		std::cout << "C" << std::endl;
+	try
+	{
+		static_cast<void>(dynamic_cast<A &>(p));
+		std::cout << "ref: A" << std::endl;
+		return ;
+	}
+	catch (...) {}
+
+	try
+	{
+		static_cast<void>(dynamic_cast<B &>(p));
+		std::cout << "ref: B" << std::endl;
+		return ;
+	}
+	catch (...) {}
+
+	try
+	{
+		static_cast<void>(dynamic_cast<C &>(p));
+		std::cout << "ref: C" << std::endl;
+		return ;
+	}
+	catch (...)	{}
 }
 
 int main()
