@@ -38,6 +38,15 @@ public:
 		return size_;
 	}
 
+	T operator[](unsigned int idx) const
+	{
+		if (static_cast<int>(idx) < 0 || idx >= size_)
+		{
+			throw IndexOutOfBoundException();
+		}
+		return array_[idx];
+	};
+
 	T &operator[](unsigned int idx)
 	{
 		if (static_cast<int>(idx) < 0 || idx >= size_)
