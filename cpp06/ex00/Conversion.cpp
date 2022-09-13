@@ -47,8 +47,6 @@ int Conversion::toInt() const
 		return static_cast<int>(n);
 	else
 		throw ImpossibleException();
-
-	return n;
 }
 
 float Conversion::toFloat() const
@@ -69,8 +67,6 @@ float Conversion::toFloat() const
 		return n;
 	else
 		throw ImpossibleException();
-
-	return n;
 }
 
 double Conversion::toDouble() const
@@ -91,8 +87,6 @@ double Conversion::toDouble() const
 		return n;
 	else
 		throw ImpossibleException();
-
-	return n;
 }
 
 std::ostream& operator<<(std::ostream &out, const Conversion &ref)
