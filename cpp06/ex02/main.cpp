@@ -1,16 +1,13 @@
 #include "A.hpp"
 #include "B.hpp"
 #include "C.hpp"
-#include <random>
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 
 Base *generate(void)
 {
-	std::random_device rd;
-	std::mt19937 gen(rd());
-	std::uniform_int_distribution<int> dis(0, 2);
-
-	int value = dis(gen);
+	int value = rand() % 3;
 	if (value == 0)
 	{
 		std::cout << "A created." << std::endl;
@@ -42,7 +39,6 @@ void identify(Base *p)
 
 void identify(Base &p)
 {
-	dynamic_cast<A &>(p);
 	if (dynamic_cast<A *>(&p))
 		std::cout << "A" << std::endl;
 	else if (dynamic_cast<B *>(&p))
@@ -53,12 +49,15 @@ void identify(Base &p)
 
 int main()
 {
+	srand(time(NULL));
 	for (int i = 0; i < 10; i++)
 	{
 		std::cout << "===============test" << i + 1 << "===============" << std::endl;
 		Base *p = generate();
 		identify(p);
 		identify(*p);
+
+		delete p;
 	}
 	return 0;
 }
