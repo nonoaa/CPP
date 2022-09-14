@@ -64,7 +64,7 @@ float Conversion::toFloat() const
 
 	n = strtod(str, &stopstr);
 	if (str != stopstr)
-		return static_cast<double>(n);
+		return static_cast<float>(n);
 	else
 		throw ImpossibleException();
 }
