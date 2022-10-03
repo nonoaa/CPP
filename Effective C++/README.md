@@ -325,3 +325,92 @@ public:
 	- 데이터 멤버가 public이 아니라면, 사용자 쪽에서 어떤 객체를 접글할 수 있는 유일한 수단은 멤버 함수일 것이다. 전부 함수로 되어 있으니까 그냥 쓰면 되므로 클래스의 멤버에 접근하고 싶을 때 괄호를 붙여야 하는지 말아야 하는지 기억하는 수고를 덜어줄 수 있다.
 - protected는 public보다 더 많이 '보호'받고 있는 것이 절대로 아니다.
 	- 클래스에서 제거되면 깨질 수 있는 코드의 양에 반비례해서 그 데이터 멤버는 캡슐화 정도가 감소한다. public이나 protected 데이터 멤버가 제거 되었을 때, 둘다 마찬가지로 엄청나게 많은 코드가 망가질 것이다. public이나 protected나 캡슐화의 관점으로 봤을 때 오십 보 백보이므로 접근 수준은 private(캡슐화 제공)와 private가 아닌 나머지(캡슐화 없음) 이렇게 둘 뿐이라고 생각하자.
+
+### 항목23: 멤버 함수보다는 비멤버 비프렌드 함수와 더 가까워지자
+- 멤버 함수보다는 비멤버 비프렌드 함수를 자주 쓰도록 하자. 캡슐화 정도가 높아지고, 패키징 유연성도 커지며, 기능적인 확장성도 늘어난다.
+	```cpp
+	class WebBrowser{
+	public:
+		...
+		void clearCache();
+		void clearHistory();
+		void removeCookies();
+		// 멤버 함수로 구현
+		void clearEverything(); // clearCache, clearHistory, removeCookies를 호출
+		...
+	}
+	// 비멤버 함수로 구현
+	void clearBrowser(WebBrowser& wb)
+	{
+		wb.clearCache();
+		wb.clearHistory();
+		wb.removeCookies();
+	}
+	```
+	- clearBrowser를 비멤버 함수로 두고, WebBrowserStuff와 같은 네임스페이스 안에 두는 방법을 사용할 수 있다.
+	```cpp
+	namespace WebBrowserStuff{
+		class WebBrowser {...}
+		void clearBrowser(WebBrowser& wb);
+		...
+	}
+	```
+	- 함수들을 종류에 따라 여러 헤더 파일에 나누어 선언하면 컴파일 의존성에 대한 고민을 해결할 수 있다.
+	- 편의 함수 전체를 여러개의 헤더파일에, 그러나 하나의 네임스페이스에 나누어 놓으면 편의 함수 집합의 확장도 손쉬워진다.
+	```cpp
+	// "webbrowser.h" 헤더
+	// WebBrowser에 관련된 '핵심'기능들 선언
+	namespace WebBrowserSturff{
+		class WebBrowser {...};
+		...
+	}
+
+	// "webbrowserbookmarks.h"헤더
+	namespace WebBrowserStuff{
+		... // 즐겨찾기 관련 편의 함수들
+	}
+
+	// "webbrowserccookies.h"헤더
+	namespace WebBrowserStuff{
+		... // 쿠키 관련 편의 함수들
+	}
+	```
+
+	### 항목24: 타입 변환이 모든 매개변수에 대해 적용되어야 한다면 비멤버 함수를 선언하자
+	- 어떤 함수에 들어가는 모든 매개변수(this 포인터가 가리키는 객체도 포함해서)에 대해 타입 변환을 해 줄 필요가 있다면, 그 함수는 비멤버이어야 한다.
+		```cpp
+		class Rational {
+		public:
+			Rational(int numerator = 0, int denominator = 1);
+			int numerator() const;
+			int denominator() const;
+			const Rational operator*(const Rational& rhs) const;
+		private:
+			...
+		}
+
+		Rational oneEighth(1, 8);
+		Rational oneHalf(1, 2);
+
+		Rational result = oneHalf * oneEighth;
+		result = result * oneEighth;
+
+		result = oneHalf * 2;	// oneHalf.operator*(2)
+		result = 2 * oneHalf;   // 2.operator*(oneHalf) -> Error
+		```
+		```cpp
+		class Rational {
+			...
+		};
+		// 비멤버 함수로 선언
+		const Rational operator*(const Rational& lhs, const Rational& rhs)
+		{
+			return Rational(lhs.numerator() * rhs.numerator(), lhs.denominator() * rhs.denominator());
+		}
+
+		Rational oneFourth(1, 4);
+		Rational result;
+
+		result = oneFourth * 2;
+		result = 2 * oneFourth;    // Not Error
+		```
