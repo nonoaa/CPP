@@ -376,41 +376,108 @@ public:
 	}
 	```
 
-	### 항목24: 타입 변환이 모든 매개변수에 대해 적용되어야 한다면 비멤버 함수를 선언하자
-	- 어떤 함수에 들어가는 모든 매개변수(this 포인터가 가리키는 객체도 포함해서)에 대해 타입 변환을 해 줄 필요가 있다면, 그 함수는 비멤버이어야 한다.
-		```cpp
-		class Rational {
-		public:
-			Rational(int numerator = 0, int denominator = 1);
-			int numerator() const;
-			int denominator() const;
-			const Rational operator*(const Rational& rhs) const;
-		private:
-			...
-		}
+### 항목24: 타입 변환이 모든 매개변수에 대해 적용되어야 한다면 비멤버 함수를 선언하자
+- 어떤 함수에 들어가는 모든 매개변수(this 포인터가 가리키는 객체도 포함해서)에 대해 타입 변환을 해 줄 필요가 있다면, 그 함수는 비멤버이어야 한다.
+	```cpp
+	class Rational {
+	public:
+		Rational(int numerator = 0, int denominator = 1);
+		int numerator() const;
+		int denominator() const;
+		const Rational operator*(const Rational& rhs) const;
+	private:
+		...
+	}
 
-		Rational oneEighth(1, 8);
-		Rational oneHalf(1, 2);
+	Rational oneEighth(1, 8);
+	Rational oneHalf(1, 2);
 
-		Rational result = oneHalf * oneEighth;
-		result = result * oneEighth;
+	Rational result = oneHalf * oneEighth;
+	result = result * oneEighth;
 
-		result = oneHalf * 2;	// oneHalf.operator*(2)
-		result = 2 * oneHalf;   // 2.operator*(oneHalf) -> Error
-		```
-		```cpp
-		class Rational {
-			...
-		};
-		// 비멤버 함수로 선언
-		const Rational operator*(const Rational& lhs, const Rational& rhs)
+	result = oneHalf * 2;	// oneHalf.operator*(2)
+	result = 2 * oneHalf;   // 2.operator*(oneHalf) -> Error
+	```
+	```cpp
+	class Rational {
+		...
+	};
+	// 비멤버 함수로 선언
+	const Rational operator*(const Rational& lhs, const Rational& rhs)
+	{
+		return Rational(lhs.numerator() * rhs.numerator(), lhs.denominator() * rhs.denominator());
+	}
+
+	Rational oneFourth(1, 4);
+	Rational result;
+
+	result = oneFourth * 2;
+	result = 2 * oneFourth;    // Not Error
+	```
+
+### 항목25: 예외를 던지지 않는 swap에 대한 지원도 생각해 보자
+- std::swap이 어떤 타입에 대해 느리게 동작할 여지가 있다면 swap 멤버 함수를 제공하자. 이 멤버 swap은 예외를 던지지 않도록 만들자.
+- 멤버 swap을 제공했으면, 이 멤버를 호출하는 비멤버 swap도 제공하자. 클래스(템플릿이 아닌)에 대해서는, std::swap도 특수해 두자.
+- 사용자 입장에서 swap을 호출할 때는, std::swap에 대한 using 선언을 넣어 준 후에 네임스페이스 한정 없이 swap을 호출하자.
+- 사용자 정의 타입에 대한 std 템플릿을 완전 특수화하는 것은 가능하다. 그러나 std에 어떤 것이라도 새로 '추가'하려고 들지 말자.
+
+## Chapter 5: 구현
+### 항목26: 변수 정의는 늦출 수 있는 데까지 늦추는 근성을 발휘하자
+- 변수 정의는 늦출 수 있을 때까지 늦추자. 프로그램이 더 깔끔해지며 효율도 좋아진다.
+	- 다음과 같은 경우 쓸데없는 기본생성자 호출과 소멸자 호출을 막을 수 있다.
+	```cpp
+	std::string encryptPassword(const std::string& password)
+	{
+		// std::string encrypted; 기존위치
+
+		if (password.length() < MinimumPasswordLength)
 		{
-			return Rational(lhs.numerator() * rhs.numerator(), lhs.denominator() * rhs.denominator());
+			throw logic_error("Password is too short")
 		}
+		// 효율 개선
+		std::string encrypted(password);
 
-		Rational oneFourth(1, 4);
-		Rational result;
-
-		result = oneFourth * 2;
-		result = 2 * oneFourth;    // Not Error
+		encrypt(encrypted);
+		return encrypted;
+	}
+	```
+	- A
+		```cpp
+		Widget w;
+		for (int i = 0; i < n; i++)
+		{
+			w = i;
+		}
 		```
+	- B
+		```cpp
+		for (int i = 0; i < n; i++)
+		{
+			Widget w(i);
+		}
+		```
+	- A 방법: 생성자 1번, 소멸자 1번, 대입 n번
+	- B 방법: 생성자 n번, 소멸자 n번
+	- 1.대입이 생성자-소멸자 쌍보다 비용이 덜 들고 2.전체 코드에서 수행 성능에 민감한 부분을 건드리는중이라고 생각하지 않는다면, 앞뒤 볼 것 없이 B 방법으로 가는 것이 좋다.
+
+### 항목27: 캐스팅은 절약, 또 절약! 잊지 말자
+- 다른 방법이 가능하다면 캐스팅은 피하자. 특히 수행 성능에 민감한 코드에서 dynamic_cast는 몇 번이고 다시 생각하자. 설계 중에 캐스팅이 필요해졌다면, 캐스팅을 쓰지 않는 다른 방법을 시도해 보자.
+- 캐스팅이 어쩔 수 없이 필요하다면, 함수 안에 숨길 수 있도록 해보자. 이렇게 하면 최소한 사용자는 자신의 코드에 캐스팅을 넣지 않고 이 함수를 호출할 수 있게 된다.
+- 구형 스타일의 캐스트를 쓰려거든 C++ 스타일의 캐스트를 선호하자. 발견하기도 쉽고, 설계자가 어떤 역할을 의도했는지가 더 자세하게 드러난다.
+	- const_cast\<T>(표현식)
+		- 객체의 상수성을 없애는 용도로 사용된다. 이런 기능을 가진 C++ 스타일의 캐스트는 이것밖에 없다.
+	- dynamic_cast\<T>(표현식)
+		- 이른바 '안전한 다운캐스팅'을 할 때 사용하는 연산자이다. 즉, 주어진 객체가 어떤 클래스 상속 계통에 속한 특정 타입인지 아닌지를 결정하는 작업에 쓰인다. 구형 스타일의 캐스트 문법으로는 흉내조차도 낼 수 없는 유일한 캐스트이기도 하다. 덤으로, 신경 쓰일 정도로 런타임 비용이 높은 캐스트 연산자로도 유일하다.
+	- reinterpret_cast\<T>(표현식)
+		- 포인터를 int로 바꾸는 등의 하부 수준 캐스팅을 위해 만들어진 연산자로서, 이것의 적용 결과는 구현환경에 의존적이다(이식성이 없다). 이런 캐스트는 하부 수준 코드 외에는 거의 없어야 한다. 이 책에서도 원시 메모리용 디버깅 할당자를 작성하는 방법에 대해 의견을 제시할 때 딱 한번 썼다고 한다.
+	- static_cast\<T>(표현식)
+		- 암시적 변환[비상수 객체를 상수 객체로 바꾸거나, int를 double로 바꾸는 등의 변환]을 강제로 진행할 때 사용한다. 흔히들 이루어지는 타입 변환을 거꾸로 수행하는 용도(void*를 일반 타입의 포인터로 바꾸거나, 기본 클래스의 포인터를 파생 클래스의 포인터로 바꾸는 등)로도 쓰인다. 물론 상수 객체를 비상수 객체로 캐스팅하는 데 이것을 쓸 수는 없다.(const_cast 연산자밖에 안 됨)
+	- 다음과 같은 경우, 두 포인터의 값이 같지 않을 수 있다.
+		```cpp
+		class Base {...};
+		class Derived: public Base {...};
+		Derived d;
+		Base *pb = &d;
+		```
+		- 포인터의 변위(offset)을 Derived* 포인터에 적용하여 실제의 Base* 포인터 값을 구하는 동작이 바로 런타임에 이루어진다.
+		- 객체 하나가 가질 수 있는 주소가 오직 한 개가 아니라 그 이상이 될 수 있음을(Base* 포인터로 가리킬 때의 주소, Dreived* 포인터로 가리킬 때의 주소) 보여주는 사례이다.
