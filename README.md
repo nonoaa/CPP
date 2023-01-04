@@ -159,3 +159,5 @@ typename T::iterator easyfind(T &container, int to_find)
 	```
 	- 위에서 a, ㅁ같은 문자를 입력할경우, cin내부 rdstate 변수의 failbit(4)를 1로 만들어준다. 이후 failbit가 1이기때문에 입력을 추가로 받을 수 없어서 b에는 0이 들어가게 된다. 따라서 다음 입력을 받기 전에 cin의 clear()함수를 사용하여 rd_state를 goodbit(0)으로 만들어준 후 사용해야 한다. 또한 ignore()함수를 통해 입력 버퍼를 비워줘야 한다.
 	- 1.23같은 소수를 입력할경우, rdstate의 비트는 변화가 없고 버퍼에만 값이 남아있게 된다. 버퍼에 값이 남아있어 추가적인 입력을 받지 못한다. 이경우는 clear()함수를 실행할 필요가 없고 ignore()함수로 입력 버퍼를 비워줘야 한다.
+	- iostate
+		- https://en.cppreference.com/w/cpp/io/ios_base/iostate
